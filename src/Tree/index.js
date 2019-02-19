@@ -297,6 +297,19 @@ export default class Tree extends React.Component {
   };
 
   /**
+   * handleOnContextClickCb - Handles the user-defined `onContextClick` function
+   *
+   * @param {object} targetNode Description
+   *
+   * @return {void}
+   */
+  handleOnContextClickCb = (targetNode, evt) => {
+    const { onContextClick } = this.props;
+    if (onContextClick && typeof onContextClick === 'function') {
+      onContextClick(clone(targetNode), evt);
+    }
+  };
+  /**
    * handleOnMouseOverCb - Handles the user-defined `onMouseOver` function
    *
    * @param {string} nodeId
@@ -463,6 +476,7 @@ export default class Tree extends React.Component {
                 name={nodeData.name}
                 attributes={nodeData.attributes}
                 onClick={this.handleNodeToggle}
+                onContextClick={this.handleOnContextClickCb}
                 onMouseOver={this.handleOnMouseOverCb}
                 onMouseOut={this.handleOnMouseOutCb}
                 textLayout={textLayout}
@@ -488,6 +502,7 @@ Tree.defaultProps = {
   },
   nodeLabelComponent: null,
   onClick: undefined,
+  onContextClick: undefined,
   onMouseOver: undefined,
   onMouseOut: undefined,
   onUpdate: undefined,
@@ -524,6 +539,7 @@ Tree.propTypes = {
   }),
   nodeLabelComponent: T.object,
   onClick: T.func,
+  onContextClick: T.func,
   onMouseOver: T.func,
   onMouseOut: T.func,
   onUpdate: T.func,

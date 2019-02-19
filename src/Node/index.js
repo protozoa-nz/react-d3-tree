@@ -83,6 +83,10 @@ export default class Node extends React.Component {
     this.props.onClick(this.props.nodeData.id, evt);
   };
 
+  handleContextClick = evt => {
+    this.props.onContextClick(this.props.nodeData.id, evt);
+  };
+
   handleOnMouseOver = evt => {
     this.props.onMouseOver(this.props.nodeData.id, evt);
   };
@@ -110,6 +114,7 @@ export default class Node extends React.Component {
         className={nodeData._children ? 'nodeBase' : 'leafNodeBase'}
         transform={this.state.transform}
         onClick={this.handleClick}
+        onContextMenu={this.handleContextClick}
         onMouseOver={this.handleOnMouseOver}
         onMouseOut={this.handleOnMouseOut}
       >
@@ -151,6 +156,7 @@ Node.propTypes = {
   orientation: T.oneOf(['horizontal', 'vertical']).isRequired,
   transitionDuration: T.number.isRequired,
   onClick: T.func.isRequired,
+  onContextClick: T.func.isRequired,
   onMouseOver: T.func.isRequired,
   onMouseOut: T.func.isRequired,
   name: T.string.isRequired,
